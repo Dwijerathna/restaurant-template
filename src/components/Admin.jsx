@@ -71,7 +71,11 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    if (token) fetchReservations();
+    if (token) {
+      fetchReservations();
+      const interval = setInterval(fetchReservations, 30000);
+      return () => clearInterval(interval);
+    }
   }, [token]);
 
   const filtered =

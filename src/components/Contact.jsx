@@ -148,9 +148,21 @@ export default function Contact() {
             {loading ? "SENDING..." : "RESERVE TABLE"}
           </button>
           {status === "success" && (
-            <p className="text-green-400 text-sm text-center">
-              Reservation sent successfully! ✓
-            </p>
+            <div className="text-center py-8 px-4 border border-gray-800 rounded-xl">
+              <div className="text-amber-400 text-4xl mb-4">✓</div>
+              <h3 className="font-serif text-2xl mb-2">
+                Reservation Received!
+              </h3>
+              <p className="text-gray-400 text-sm mb-4">
+                Thank you! We'll confirm your reservation shortly via email.
+              </p>
+              <button
+                onClick={() => setStatus(null)}
+                className="text-xs tracking-widest border border-gray-700 px-6 py-3 hover:border-amber-400 hover:text-amber-400 transition-colors"
+              >
+                MAKE ANOTHER RESERVATION
+              </button>
+            </div>
           )}
           {status === "error" && (
             <p className="text-red-400 text-sm text-center">

@@ -7,15 +7,6 @@ html {
   scroll-padding-top: 80px;
 }
 
-.text-amber-400 {
-  color: var(--theme) !important;
-}
-.border-amber-400 {
-  border-color: var(--theme) !important;
-}
-.bg-amber-400 {
-  background-color: var(--theme) !important;
-}
 .fade-section {
   opacity: 0;
   transform: translateY(30px);
