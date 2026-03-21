@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { io } from "socket.io-client";
 export default function Admin() {
   const [token, setToken] = useState(localStorage.getItem("admin_token"));
   const [reservations, setReservations] = useState([]);
@@ -74,10 +74,23 @@ export default function Admin() {
     if (token) {
       fetchReservations();
       const interval = setInterval(fetchReservations, 30000);
-      return () => clearInterval(interval);
+
+      const socket = io("http://localhost:3001");
+      socket.on("new_reservation", (data) => {
+        fetchReservations();
+        const audio = new Audio(
+          "https://www.soundjay.com/buttons/sounds/button-09a.mp3",
+        );
+        audio.play().catch(() => {});
+        alert(`🔔 New reservation from ${data.name}!`);
+      });
+
+      return () => {
+        clearInterval(interval);
+        socket.disconnect();
+      };
     }
   }, [token]);
-
   const filtered =
     filter === "all"
       ? reservations
